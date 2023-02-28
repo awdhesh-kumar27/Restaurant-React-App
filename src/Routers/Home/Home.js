@@ -1,10 +1,11 @@
 import React  from "react";
 import NavigationBar from "../Navigation/Navbar";
+import HomeVideo from "./HomeVideo";
 
 const Home = () =>{
     return (
         <div>
-            <NavigationBar></NavigationBar>
+            <HomeVideo></HomeVideo>
         </div>
     );
 }

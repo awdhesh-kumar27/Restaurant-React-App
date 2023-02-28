@@ -13,6 +13,8 @@ import NavigationBar from './Routers/Navigation/Navbar';
  //import BGImage from '../src/Assets/i-like-food.svg';
 // style={{backgroundImage:`url(${BGImage})`}}
 
+import HomeVideo from './Routers/Home/HomeVideo';
+
 
 import Delivery from './Components/User/Delivery';
 import OrderHistory from './Components/User/OrderHistory';
@@ -34,7 +36,7 @@ function App() {
      <Routes>
   
 
-      {/* <Route path="/" element={<Home></Home>}></Route> */}
+      <Route path="/" element={<Home></Home>}></Route>
       <Route path="/UserHome" element={<UserHome></UserHome>}>
          <Route path="" element={<UserHomeDiv></UserHomeDiv>}></Route>
          <Route path="Delivery" element={<Delivery></Delivery>}></Route>

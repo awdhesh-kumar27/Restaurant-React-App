@@ -1,0 +1,12 @@
+.demo-video{
+    width: 60%;
+    object-fit: contain;
+    margin-left:20%;
+}
+
+.video-div{
+   border: 2px solid blue;
+   background-color: rgb(7, 3, 7);
+   opacity: 0.8;
+}
+
