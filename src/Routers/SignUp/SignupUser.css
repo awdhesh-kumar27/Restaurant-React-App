@@ -1,0 +1,63 @@
+
+.register-user{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+@media (max-width:650px) {
+   .register-img-div{
+    display: none;
+   }
+}
+.register-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+.register-form{
+   border: 6px solid black;
+   width: 350px;
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+   border-radius: 5px 5px;
+   box-shadow: 2px 2px 4px 4px gray;
+}
+
+
+.input-box{
+   width: 90%;
+   height: 25px;
+   margin-top: 5px;
+   margin-bottom: 10px ;
+}
+
+.submit-button{
+   width: 92%;
+   height: 35px;
+   color:white;
+   margin-top: 10px;
+   background-color: black;
+   cursor: pointer;
+   margin-bottom: 15px;
+}
+
+.submit-button:hover{
+   color:rgb(253, 253, 253);
+   background-color: rgb(125, 127, 126);
+}
+.heading{
+   font-family: cursive;
+}
+
+.register-nav-link{
+    color:blue;
+    text-decoration: none;
+}
+
+.user-img{
+   width: 400px;
+   height: 700px;
+}
