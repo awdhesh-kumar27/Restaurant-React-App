@@ -1,7 +1,8 @@
 
 import { signInWithEmailAndPassword,signup , createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { FirebaseApp,FirebaseAuth } from "./Firebase";
-import {createContext,useContext,useState,useEffect} from "react"
+import {createContext,useContext,useState,useEffect} from "react";
+
 
 const FirebaseContext = createContext(null);
 export const useFirebase = () =>{
@@ -11,7 +12,8 @@ export const useFirebase = () =>{
 export const FirebaseProvider =(props)=>{
     
     const [user,setUser] = useState(null);
-
+   
+   
     useEffect(()=>{
         onAuthStateChanged(FirebaseAuth,(user)=>{
             if(user){
@@ -21,7 +23,10 @@ export const FirebaseProvider =(props)=>{
             }
         })
     },[user]);
-
+    
+   
+    const loginStatus = user ? (true) : (false);
+   
     const signupUserwithEmailandPassword = (email,password) =>{
         createUserWithEmailAndPassword(FirebaseAuth,email,password);
     }
@@ -40,6 +45,6 @@ export const FirebaseProvider =(props)=>{
     }
 
     return (
-        <FirebaseContext.Provider value = {{user,signinUserwithEmailandPassword,signupUserwithEmailandPassword,userLogout}} >{props.children}</FirebaseContext.Provider>
+        <FirebaseContext.Provider value = {{loginStatus,user,signinUserwithEmailandPassword,signupUserwithEmailandPassword,userLogout}} >{props.children}</FirebaseContext.Provider>
     );
 }

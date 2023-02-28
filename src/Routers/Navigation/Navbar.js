@@ -13,6 +13,7 @@ const NavigationBar = ()=>{
     const currentUser = firebase.user;
     const logoutHandler = () =>{
       firebase.userLogout();
+      navigate("/SignIn");
   }
 
     return(
