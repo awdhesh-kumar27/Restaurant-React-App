@@ -12,14 +12,12 @@ const UserHome = () =>{
     const {loginStatus}  = useFirebase();
     const navigate = useNavigate();
     
-    useEffect(()=>{
-
-    },[user]);
+    
 
 
     {
         if(!loginStatus){
-            
+            navigate(-1);
             return (<Signin></Signin>);
         }
     }

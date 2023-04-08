@@ -1,0 +1,40 @@
+.dish-card{
+    border : 2px solid black;
+    width:300px;
+    height: 350px;
+    margin-bottom:30px;
+    border-radius: 8px;
+}
+
+.dish-card-img{
+    width: 100%;
+    height:200px;
+    margin:0px;
+}
+
+.card-view-btn{
+    color:white;
+    background-color: rgb(25, 64, 6);
+    border-radius: 5px;
+    width: 100px;
+    margin-left: 10px;
+    padding:5px;
+}
+
+.card-dish-name{
+    color:rgb(76, 74, 2);
+    margin-left: 10px;
+}
+.card-rest-name{
+    margin-left: 10px;
+}
+.card-amt{
+    color:rgb(197, 42, 42);
+    margin-left: 10px;
+}
+
+.btn-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

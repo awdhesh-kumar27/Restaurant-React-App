@@ -1,10 +1,14 @@
 
 import React from "react";
 
+import OrderCard from "./OrderCard";
+import './YourOrders.css';
+
 const YourOrders = ()=>{
     return (
-        <div>
-            YourOrders
+        <div className="order-dishes">
+           <OrderCard></OrderCard>
+           <OrderCard></OrderCard>
         </div>
     );
 }

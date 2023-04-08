@@ -1,0 +1,17 @@
+.order-card{
+    border : 2px solid black;
+    width:300px;
+    height: 650px;
+    margin-bottom:30px;
+    border-radius: 8px;
+    
+}
+
+.update-btn{
+    color:white;
+    background-color: black;
+    width: 80%;
+    margin-left:20px;
+    margin-top:10px;
+    padding: 5px;
+}

@@ -14,7 +14,8 @@ const SidebarUser =() =>{
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse  className="sidebar-collapse">
           <Nav className={'sidebar-btn'}>
-            <NavLink className={'side-link'} to='/UserHome/Delivery'>Delivery</NavLink>
+          <NavLink className={'side-link'} to='/UserHome'>Home</NavLink>
+            <NavLink className={'side-link'} to='/UserHome/Cart'>Cart</NavLink>
             <NavLink className={'side-link'} to='/UserHome/YourOrders'>Your Orders</NavLink>
             <NavLink className={'side-link'} to='/UserHome/OrderHistory'>Order History</NavLink>
             <NavLink className={'side-link'} to='/UserHome/UserProfile'>Profile</NavLink>

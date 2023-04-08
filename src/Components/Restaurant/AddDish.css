@@ -1,0 +1,25 @@
+.add-dish-form{
+    border: 6px solid black;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px 5px;
+    box-shadow: 2px 2px 4px 4px gray;
+    
+ }
+
+ .add-dish{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+ }
+
+ .add-dish-heading{
+    text-align: center;
+    color:rgb(31, 105, 31);
+    font-family:cursive;
+ }
+ 

@@ -1,10 +1,10 @@
 
 import React from "react";
-
+import ActiveDish from "./ActiveDish";
 const RestHome = ()=>{
     return (
         <div>
-            RestHome
+            <ActiveDish></ActiveDish>
         </div>
     );
 }

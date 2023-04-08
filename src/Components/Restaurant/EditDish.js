@@ -1,8 +1,8 @@
 
 import React, { useState } from "react";
-import './AddDish.css';
+import './EditDish.css';
 
-const AddDish = ()=>{
+const EditDish = ()=>{
 
     const [dishName,setDishName] = useState("");
     const [dishPrice,setdishPrice] = useState();
@@ -18,9 +18,9 @@ const AddDish = ()=>{
         setDishName(dishname);
     }
     return (
-     <div className="add-dish">
-        <div className="add-dish-form">
-            <h1 className="add-dish-heading">Add Dish</h1>
+     <div className="edit-dish">
+        <div className="edit-dish-form">
+            <h1 className="edit-dish-heading">Edit Dish</h1>
           
             <form>
                 <div >
@@ -39,7 +39,7 @@ const AddDish = ()=>{
                     <input type="file" name="dishimgupload"></input>
                 </div>
                 <div>
-                        <button className="submit-button" type="submit">Add Dish</button>
+                        <button className="submit-button" type="submit">Edit Dish</button>
                 </div>
             </form>
         </div>
@@ -47,4 +47,4 @@ const AddDish = ()=>{
     );
 }
 
-export default AddDish;
+export default EditDish;

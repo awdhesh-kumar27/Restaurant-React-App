@@ -2,7 +2,7 @@
 import { createContext,useContext, useEffect,useState } from "react";
 import { initializeApp } from "firebase/app";
 import {signOut,getAuth ,createUserWithEmailAndPassword ,signInWithEmailAndPassword ,onAuthStateChanged} from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -18,3 +18,4 @@ const firebaseConfig = {
 
 export const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseAuth = getAuth(FirebaseApp);
+export const firestore = getFirestore(FirebaseApp);

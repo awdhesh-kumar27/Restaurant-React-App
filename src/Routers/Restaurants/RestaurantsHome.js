@@ -16,7 +16,7 @@ const RestaurantsHome = ()=>{
 
     {
         if(!loginStatus){
-          
+          navigate(-1);
             return <Signin></Signin>
         }
     }

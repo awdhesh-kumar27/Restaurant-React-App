@@ -1,12 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
+import { useState} from "react";
 import './SignupRest.css';
-import { NavLink } from "react-router-dom";
+import { NavLink, useAsyncError } from "react-router-dom";
 import UserloginImg from "../../Assets/restaurant-signup.png";
 import { useFirebase } from "../../Components/UserContext/Context";
+import {  useNavigate } from "react-router-dom";
 
 const SignupRest = () => {
    
+    const navigate = useNavigate();
     const firebase = useFirebase();
     const [RestaurantName,setRestaurantName] = useState("");
     const  [OwnerName, setOwnerName] = useState("");
@@ -14,7 +16,21 @@ const SignupRest = () => {
     const  [Password, setPassword] = useState("");
     const  [Mobileno, setmobileno] = useState("");
     const  [Address, setaddress] = useState("");
-    const [UserType,setUserType] = useState("Restaurant");
+    const [Type,setType] = useState("Restaurant");
+    
+    useEffect(()=>{
+        if(firebase.user){
+            //   console.log(firebase.user);
+               if(firebase.user.displayName === "User"){
+                   navigate("/UserHome");
+            }
+               if(firebase.user.displayName === "Restaurant"){
+                    navigate("/RestaurantHome");
+               }
+               // navigate("/UserHome");
+            }
+    },[firebase.user]);
+     
 
     const mobilenohandler = (event) =>{
         const mobileno = event.target.value;
@@ -47,14 +63,19 @@ const SignupRest = () => {
         event.preventDefault();
         console.log("Create account successfull");
         await firebase.signupUserwithEmailandPassword(Email,Password);
-        console.log("signIn successfull");
+        console.log(firebase.user);
+        console.log("signup as restaurant successfull");
+        firebase.profileUpdate(Type);
+        firebase.addNewUser(Type,RestaurantName,Email,Address,Mobileno);
         setEmail("");
         setOwnerName("");
         setRestaurantName("");
         setPassword("");
         setaddress("");
         setmobileno("");
+     
    }
+  
    
     return (
         <div className="register-restaurant">

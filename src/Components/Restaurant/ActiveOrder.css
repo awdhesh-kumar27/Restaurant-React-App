@@ -1,0 +1,9 @@
+.order-dishes{
+    display: flex;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 30px;
+    /* justify-content: space; */
+    align-content: space-around;
+}

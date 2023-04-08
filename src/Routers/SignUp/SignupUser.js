@@ -1,20 +1,35 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import './SignupUser.css';
 import { Link,NavLink } from "react-router-dom";
 import UserloginImg from "../../Assets/user-signup.png";
 import { useFirebase } from "../../Components/UserContext/Context";
-
+import {  useNavigate } from "react-router-dom";
 const SignupUser = () => {
    
-
+    const navigate = useNavigate();
     const firebase = useFirebase();
     const  [Name, setName] = useState("");
     const  [Email, setEmail] = useState("");
     const  [Password, setPassword] = useState("");
     const  [Mobileno, setmobileno] = useState("");
     const  [Address, setaddress] = useState("");
-    const [UserType,setUserType] = useState("User");
+    const [Type,setType] = useState("User");
+
+
+    useEffect(()=>{
+        if(firebase.user){
+            //   console.log(firebase.user);
+               if(firebase.user.displayName === "User"){
+                   navigate("/UserHome");
+            }
+               if(firebase.user.displayName === "Restaurant"){
+                    navigate("/RestaurantHome");
+               }
+               // navigate("/UserHome");
+            }
+    },[firebase.user]);
+
     const mobilenohandler = (event) =>{
         const mobileno = event.target.value;
         setmobileno(mobileno);
@@ -41,16 +56,20 @@ const SignupUser = () => {
 
    const registerHandler = async (event) =>{
           event.preventDefault();
-          console.log("Create account successfull");
+          
           await firebase.signupUserwithEmailandPassword(Email,Password);
-        console.log("signIn successfull");
-        setEmail("");
-        setName("");
-        setPassword("");
-        setaddress("");
-        setmobileno("");
+          firebase.profileUpdate(Type);
+          await firebase.addNewUser(Type,Name,Email,Address,Mobileno);
+        //  console.log("Create account successfull");
+          setEmail("");
+         setName("");
+         setPassword("");
+         setaddress("");
+         setmobileno("");
+        
    }
    
+
     return (
         <div className="register-user">
             <div className="register-img-div">

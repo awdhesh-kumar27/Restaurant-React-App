@@ -2,7 +2,7 @@ import React from "react";
 import { useState ,useEffect } from "react";
 import './Signin.css';
 import { useFirebase } from "../../Components/UserContext/Context";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 const Signin = () => {
    
     const firebase = useFirebase();
@@ -10,11 +10,20 @@ const Signin = () => {
     const  [Email, setEmail] = useState("");
     const  [Password, setPassword] = useState("");
      
-   useEffect(()=>{
-     if(firebase.user){
-         navigate("/UserHome");
-     }
-   },[firebase,navigate]);
+    useEffect(()=>{
+        if(firebase.user){
+            //   console.log(firebase.user);
+               if(firebase.user.displayName === "User"){
+                   navigate("/UserHome");
+            }
+               if(firebase.user.displayName === "Restaurant"){
+                    navigate("/RestaurantHome");
+               }
+               // navigate("/UserHome");
+            }else{
+                navigate("")
+            }
+    },[firebase.user]);
    
     const emailhandler = (event) =>{
         const email = event.target.value;
@@ -25,16 +34,21 @@ const Signin = () => {
         setPassword(password);
     };
    
- 
+   
 
     const loginHandler = async(event) =>{
        event.preventDefault();
        console.log("Login the user");
-       await firebase.signinUserwithEmailandPassword(Email,Password);
+       const login = await firebase.signinUserwithEmailandPassword(Email,Password);
+       
+       
+       console.log(firebase.userData);
        console.log("Login successful");
        setEmail("");
        setPassword("");
+       
     }
+   
     return (
         <div className="login-div">
             <div className="login-form">
