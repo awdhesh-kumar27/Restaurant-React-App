@@ -71,11 +71,12 @@ export const FirebaseProvider =(props)=>{
     
    };
 
-   const addDish = async (dishName,dishPrice) => {
+   const addDish = async (dishName,dishPrice,restName) => {
     console.log(firestore);
       await  addDoc(collection(firestore,"dishes"),{
             dishName,
             dishPrice,
+            restName,
             userId : user.uid,
             userEmail : user.email,
             date : new Date()
@@ -84,10 +85,11 @@ export const FirebaseProvider =(props)=>{
  };
 
 
- const addOrder = async (dishId,dishName,dishPrice,dishQuantity,dishTotalPrice,RestId,status) => {
+ const addOrder = async (dishId,restName,dishName,dishPrice,dishQuantity,dishTotalPrice,RestId,status) => {
     console.log(firestore);
       await  addDoc(collection(firestore,"Orders"),{
-           dishId,
+            dishId,
+            restName,
             dishName,
             dishPrice,
             dishQuantity,
@@ -108,10 +110,36 @@ export const FirebaseProvider =(props)=>{
    const getDishById = async (id)=>{
     const docRef = doc(firestore,'dishes',id);
     const result = await getDoc(docRef);
-    console.log(result.data());
+    //console.log(result.data());
     return result;
   }
 
+  const getRestNameById = async ()=>{
+    const docRef = doc(firestore,'Users',user.uid);
+    const result = await getDoc(docRef);
+    //console.log(result.data());
+    return result;
+  }
+  var restDetail = [];
+  const fetchRestDetail = async() =>{
+      
+      const q = query(collection(firestore,"Users"),where("Email","==",user.email));
+      const querysnap = await getDocs(q);
+      restDetail = [];
+      querysnap.forEach((doc)=>{
+     
+       const obj = doc.data();
+       obj.id = doc.id;
+      //  console.log(obj);
+  
+       restDetail.push(obj);
+       // console.log(newDishData)
+      });
+     // console.log(fetchedDish);
+  
+       console.log(restDetail);
+      return restDetail;  
+   }
 
 
   const updateOrderById = async (id, newstatus) =>{
@@ -194,6 +222,6 @@ const fetchAllDish = async() =>{
 
 
      return (
-        <FirebaseContext.Provider value = {{updateOrderById,fetchAllOrders,addOrder,getDishById,fetchAllDish,deleteRestDish,fetchedDish,loginStatus,user,userData,dishData,orderData,fetchRestDishData,addDish,addDoc,addNewUser,setuserData,signinUserwithEmailandPassword,signupUserwithEmailandPassword,userLogout,profileUpdate}} >{props.children}</FirebaseContext.Provider>
+        <FirebaseContext.Provider value = {{fetchRestDetail,getRestNameById,updateOrderById,fetchAllOrders,addOrder,getDishById,fetchAllDish,deleteRestDish,fetchedDish,loginStatus,user,userData,dishData,orderData,fetchRestDishData,addDish,addDoc,addNewUser,setuserData,signinUserwithEmailandPassword,signupUserwithEmailandPassword,userLogout,profileUpdate}} >{props.children}</FirebaseContext.Provider>
     );
 }

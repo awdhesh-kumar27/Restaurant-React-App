@@ -23,13 +23,16 @@ const OrderCard = (props) => {
         if (Status == "Pending") {
 
         } else if (Status == "Order-Accepted") {
-            setdropdownItem(["Delievered"]);
+            setdropdownItem(["Delievered","Rejected"]);
+          
         } else if (Status == "Rejected") {
             flag = true;
             setdropdownItem(["Rejected"]);
+            setnewStatus("Rejected");
         } else {
             flag = true;
             setdropdownItem(["Delievered"])
+            setnewStatus("Delievered")
         }
     }, []);
 
@@ -37,20 +40,19 @@ const OrderCard = (props) => {
         event.preventDefault();
         setStatus(newStatus);
         console.log("Status : ",Status);
-        await firebase.updateOrderById(props.dish.id,newStatus);
-       
-        
-        //navigate("/RestaurantHome");
+        await firebase.updateOrderById(props.dish.id,newStatus); 
+        navigate("/RestaurantHome");
     }
 
     console.log(dropdownItem);
     const newStatusHandler=(event)=>{
         const status = event.target.value;
+        console.log(event.target.value);
         setnewStatus(status);
-      
+        console.log(status);
     }
     
-    console.log("newstatus : ",newStatus);
+  //  console.log("newstatus : ",newStatus);
     
    
     return (
@@ -58,7 +60,7 @@ const OrderCard = (props) => {
             <div className="order-card">
                 <img className="dish-view-img" src={DishImg}></img>
                 <h1 className="card-dish-name">{props.dish.dishName}</h1>
-                <h3 className="card-rest-name">Restaurant Name</h3>
+                <h3 className="card-rest-name">{props.dish.restName}</h3>
                 <h6 className="card-amt">Amount for one : {props.dish.dishPrice}</h6>
 
                 <div className="card-quant">

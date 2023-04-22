@@ -18,11 +18,10 @@ const DishView = () =>{
     var newData = {};
     // console.log(params);
     useEffect(()=>{
-        firebase.getDishById(params.dishId).then((value)=> setdishData(value.data()));
-      
-          
+        firebase.getDishById(params.dishId).then((value)=> setdishData(value.data()));       
    },[]);
 
+     //  console.log("dishData" ,dishData);
     const iquantityHandler =  (event)=>{
            event.preventDefault();
            if(quantity<8){
@@ -40,10 +39,13 @@ const DishView = () =>{
        
         }
     }
+    console.log("dishData" ,dishData);
     const orderHandler = async(event) =>{
         event.preventDefault();
+
          if(totalamount>0){
-          await firebase.addOrder(params.dishId,dishData.dishName,dishData.dishPrice,quantity,totalamount,dishData.userId,"Pending");
+          //  console.log(dishData);
+          await firebase.addOrder(params.dishId,dishData.restName,dishData.dishName,dishData.dishPrice,quantity,totalamount,dishData.userId,"Pending");
           window.alert("Order Successfully Done");
          navigate("/UserHome");
          }else{
@@ -76,7 +78,7 @@ const DishView = () =>{
                  </div>
             </div>
             <div className="view-btn-div">
-                <button class='card-view-btn'>Add to Cart</button>
+                {/* <button class='card-view-btn'>Add to Cart</button> */}
                 <button class='card-view-btn' onClick={orderHandler}>Order Now</button>
             </div>
             

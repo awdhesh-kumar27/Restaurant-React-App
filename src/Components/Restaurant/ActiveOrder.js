@@ -30,7 +30,7 @@ const ActiveOrder = ()=>{
                 currentData.map((dish)=>(
                     dish.map((data)=>(
                 
-                     (data.RestId == user.uid && (data.status == "Pending" || data.status == "Order-Accepted")) ? <OrderCard key={dish.id} dish = {data}></OrderCard> : ""
+                     (data.RestId == user.uid && (data.status == "Pending" || data.status == "Order-Accepted" )) ? <OrderCard key={dish.id} dish = {data}></OrderCard> : ""
                      
                     )
                 ))

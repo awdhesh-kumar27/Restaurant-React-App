@@ -15,10 +15,10 @@ const SidebarUser =() =>{
         <Navbar.Collapse  className="sidebar-collapse">
           <Nav className={'sidebar-btn'}>
           <NavLink className={'side-link'} to='/UserHome'>Home</NavLink>
-            <NavLink className={'side-link'} to='/UserHome/Cart'>Cart</NavLink>
+            {/* <NavLink className={'side-link'} to='/UserHome/Cart'>Cart</NavLink> */}
             <NavLink className={'side-link'} to='/UserHome/YourOrders'>Your Orders</NavLink>
             <NavLink className={'side-link'} to='/UserHome/OrderHistory'>Order History</NavLink>
-            <NavLink className={'side-link'} to='/UserHome/UserProfile'>Profile</NavLink>
+            {/* <NavLink className={'side-link'} to='/UserHome/UserProfile'>Profile</NavLink> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

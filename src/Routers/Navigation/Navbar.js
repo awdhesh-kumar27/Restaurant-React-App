@@ -30,6 +30,7 @@ const NavigationBar = ()=>{
           {
           currentUser ? (
               <Nav>
+              { (firebase.user.displayName === "User") ?   (<NavLink style={{margin:'10px'}} to="/UserHome">User Home</NavLink>) : (<NavLink style={{margin:'10px'}} to="/RestaurantHome">Restaurnt Home</NavLink>)}
                   <NavLink style={{margin:'10px'}} >{currentUser.email}</NavLink>
                  <NavLink style={{margin:'10px'}} to="/SignIn"><span onClick={logoutHandler}>LogOut</span></NavLink>
               </Nav>

@@ -9,13 +9,13 @@ const OrderCard = (props)=>{
     const amount = 50;
     const [totalamount,settotalamount] = useState(amount);
     const [Status,setStatus] = useState("Pending");
-
+    console.log(props.dish);
     return (
         <div>
              <div className="order-card">
              <img className="dish-view-img" src={DishImg}></img>
              <h1 className="card-dish-name">{props.dish.dishName}</h1>
-             <h3 className="card-rest-name">Restaurant Name</h3>
+             <h3 className="card-rest-name">{props.dish.restName}</h3>
              <h6 className="card-amt">Amount for one : {props.dish.dishPrice}</h6>
             
              <div className="card-quant">

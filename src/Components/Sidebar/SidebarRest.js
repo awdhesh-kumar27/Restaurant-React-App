@@ -18,7 +18,7 @@ const SidebarRest = ()=>{
              <NavLink className={'side-link'} to='/RestaurantHome/AddDish'>Add Dish</NavLink>
               <NavLink className={'side-link'} to='/RestaurantHome/ActiveOrder'>Active Orders</NavLink>
               <NavLink className={'side-link'} to='/RestaurantHome/PastOrder'>Order History</NavLink>
-              <NavLink className={'side-link'} to='/RestaurantHome/RestProfile'>Profile</NavLink>
+              {/* <NavLink className={'side-link'} to='/RestaurantHome/RestProfile'>Profile</NavLink> */}
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useFirebase } from "../UserContext/Context";
 import { useNavigate } from "react-router-dom";
 import './AddDish.css';
@@ -9,17 +9,28 @@ const AddDish = ()=>{
 
     const firebase = useFirebase();
      const navigate = useNavigate();
-
+     const {user} =useFirebase();
+     const {dishData} = useFirebase();
 
     const [dishName,setDishName] = useState("");
     const [dishPrice,setdishPrice] = useState();
     const [imageName,setImageName] = useState("");
-
+    const [restName,setrestName] = useState([]);
     const dishPriceHandler = (event)=>{
         const price = event.target.value;
         setdishPrice(price);
     }
 
+    useEffect( ()=>{
+        firebase.fetchRestDetail().then((Data)=>{
+         console.log(Data);
+       //   console.log(Data);
+           setrestName([...restName,Data])
+        });
+        console.log(restName);
+      },[user,dishData]);
+
+     
     const dishNameHandler = (event)=>{
         const dishname = event.target.value;
         setDishName(dishname);
@@ -27,12 +38,14 @@ const AddDish = ()=>{
 
     const addDishHandler = async(event) =>{
         event.preventDefault();
-        await firebase.addDish(dishName,dishPrice);
+        await firebase.addDish(dishName,dishPrice,restName[0][0].Name);
         setdishPrice("");
         setDishName("");
         navigate("/RestaurantHome");
         console.log("Tash successfully added ");
     }
+
+
     return (
      <div className="add-dish">
         <div className="add-dish-form">
