@@ -17,7 +17,7 @@ const UserHome = () =>{
 
     {
         if(!loginStatus){
-            navigate(-1);
+           // navigate(-1);
             return (<Signin></Signin>);
         }
     }

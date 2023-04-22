@@ -1,9 +1,9 @@
 .order-dishes{
-    display: flex;
+    display: grid;
     margin-top: 30px;
-    flex-wrap: wrap;
-    flex-direction: row;
+   
     margin-bottom: 30px;
-    justify-content: space-around;
-    align-content: space-around;
+    grid-template-columns: auto auto auto auto;
+     gap: 50px;
+    margin-left: 5%;
 }

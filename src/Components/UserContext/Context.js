@@ -16,6 +16,8 @@ export const FirebaseProvider =(props)=>{
     
     const [user,setUser] = useState(null);
     const [userData,setuserData] = useState(null);
+    const [dishData,setDishData] = useState(null);
+    const [orderData,setOrderData] = useState(null);
     
     useEffect(()=>{
        onAuthStateChanged(FirebaseAuth,(user)=>{
@@ -69,27 +71,129 @@ export const FirebaseProvider =(props)=>{
     
    };
 
-//    const fetchUserData = async() =>{
+   const addDish = async (dishName,dishPrice) => {
+    console.log(firestore);
+      await  addDoc(collection(firestore,"dishes"),{
+            dishName,
+            dishPrice,
+            userId : user.uid,
+            userEmail : user.email,
+            date : new Date()
+       });
+       console.log(firestore);
+ };
+
+
+ const addOrder = async (dishId,dishName,dishPrice,dishQuantity,dishTotalPrice,RestId,status) => {
+    console.log(firestore);
+      await  addDoc(collection(firestore,"Orders"),{
+           dishId,
+            dishName,
+            dishPrice,
+            dishQuantity,
+            dishTotalPrice,
+            RestId,
+            status,
+            UserId : user.uid,
+            date : new Date()
+       });
+       console.log(firestore);
+ };
+
+ const deleteRestDish = async(id)=>{
+    const docRef = doc(firestore,'dishes',id);
+    await deleteDoc(docRef);
+   }
+
+   const getDishById = async (id)=>{
+    const docRef = doc(firestore,'dishes',id);
+    const result = await getDoc(docRef);
+    console.log(result.data());
+    return result;
+  }
+
+
+
+  const updateOrderById = async (id, newstatus) =>{
+    const docRef = doc(firestore,'Orders',id);
+    await updateDoc(docRef,{
+        status : newstatus
+    });
+}
+
+var alldish = [];
+const fetchAllDish = async() =>{
     
-//       const q = query(collection(firestore,"Users"),where("Email","==",user.email));
-//       const querysnap = await getDocs(q);
-      
-//       querysnap.forEach((doc)=>{
+    const q = query(collection(firestore,"dishes"));
+    const querysnap = await getDocs(q);
+    alldish = [];
+    querysnap.forEach((doc)=>{
+   
+     const obj = doc.data();
+     obj.id = doc.id;
+    //  console.log(obj);
+
+     alldish.push(obj);
+     // console.log(newDishData)
+    });
+   // console.log(fetchedDish);
+
+     console.log(alldish);
+    return alldish;  
+ }
+
+
+
+ var fetchedDish = [];
+   const fetchRestDishData = async() =>{
+    
+      const q = query(collection(firestore,"dishes"),where("userEmail","==",user.email));
+      const querysnap = await getDocs(q);
+      fetchedDish = [];
+      querysnap.forEach((doc)=>{
      
-//        const obj = doc.data();
-//        obj.id = doc.id;
-//     //    console.log(obj);
-//        const newTaskData = obj;
-//         console.log(newTaskData);
+       const obj = doc.data();
+       obj.id = doc.id;
+      //  console.log(obj);
+       const newDishData = obj;
+       fetchedDish.push(obj);
+       // console.log(newDishData)
+
+      });
+     // console.log(fetchedDish);
+
+      return fetchedDish;
+      
+   }
+
+   
+    var allOrders = [];
+    const fetchAllOrders = async() =>{
     
-//         setUser(newTaskData);
-//          console.log(user);
-//       });
+        const q = query(collection(firestore,"Orders"));
+        const querysnap = await getDocs(q);
+        allOrders = [];
+        querysnap.forEach((doc)=>{
        
-//        return userData;
-        
-//    }
+         const obj = doc.data();
+         obj.id = doc.id;
+        //  console.log(obj);
+
+         allOrders.push(obj);
+
+ 
+        //   console.log(user);
+        });
+       // console.log(fetchedDish);
+   
+         console.log(allOrders);
+        return allOrders;  
+     }
+
+
+
+
      return (
-        <FirebaseContext.Provider value = {{loginStatus,user,userData,addDoc,addNewUser,setuserData,signinUserwithEmailandPassword,signupUserwithEmailandPassword,userLogout,profileUpdate}} >{props.children}</FirebaseContext.Provider>
+        <FirebaseContext.Provider value = {{updateOrderById,fetchAllOrders,addOrder,getDishById,fetchAllDish,deleteRestDish,fetchedDish,loginStatus,user,userData,dishData,orderData,fetchRestDishData,addDish,addDoc,addNewUser,setuserData,signinUserwithEmailandPassword,signupUserwithEmailandPassword,userLogout,profileUpdate}} >{props.children}</FirebaseContext.Provider>
     );
 }

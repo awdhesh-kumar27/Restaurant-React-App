@@ -1,8 +1,15 @@
 
 import React, { useState } from "react";
+import { useFirebase } from "../UserContext/Context";
+import { useNavigate } from "react-router-dom";
 import './AddDish.css';
 
 const AddDish = ()=>{
+
+
+    const firebase = useFirebase();
+     const navigate = useNavigate();
+
 
     const [dishName,setDishName] = useState("");
     const [dishPrice,setdishPrice] = useState();
@@ -17,12 +24,21 @@ const AddDish = ()=>{
         const dishname = event.target.value;
         setDishName(dishname);
     }
+
+    const addDishHandler = async(event) =>{
+        event.preventDefault();
+        await firebase.addDish(dishName,dishPrice);
+        setdishPrice("");
+        setDishName("");
+        navigate("/RestaurantHome");
+        console.log("Tash successfully added ");
+    }
     return (
      <div className="add-dish">
         <div className="add-dish-form">
             <h1 className="add-dish-heading">Add Dish</h1>
           
-            <form>
+            <form onSubmit={addDishHandler}>
                 <div >
                     <label> Dish Name </label>
                     <br></br>
